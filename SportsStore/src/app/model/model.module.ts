@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ModelService } from './model.service';
+import { ModelService, ProductRepository } from './model.service';
 
 @NgModule({
   imports: [
     CommonModule
   ],
   declarations: [],
-  providers:[ModelService]
+  providers:[ModelService, ProductRepository]
 })
 export class ModelModule { }
