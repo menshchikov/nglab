@@ -6,10 +6,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 //import { StoreComponent } from './store/store.component';
 import {StoreModule} from './store/store.module';
+//import { CounterDirective } from './counter.directive';
 
 @NgModule({
   declarations: [
-    AppComponent    
+    AppComponent//,    CounterDirective    
   ],
   imports: [BrowserModule, StoreModule
   ,AppRoutingModule
