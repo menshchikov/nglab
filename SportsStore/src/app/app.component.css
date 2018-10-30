@@ -1,0 +1,6 @@
+@import '~bootstrap/dist/css/bootstrap.min.css' ;
+.class1{
+	color:green;
+	font-weight: bold;
+	font-style: italic;
+}
