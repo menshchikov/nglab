@@ -1,21 +1,24 @@
-<div class="navbar navbar-dark bg-dark m-0">
+<div class="navbar navbar-primary m-0">
 	<a class="nabvar-brand" href="#">Sports Store</a>
 </div>
 <div class="row m-0">
-	<div class="col-3 bg-info p-2">		
-		{{getCategories().length}} Categories
+	<div class="col-3 bg-light p-2">
+		<!-- {{getCategories().length}} Categories -->
+		<button *ngFor="let cat of getCategories()" type="button" class="btn btn-outline-primary btn-block" [class.active]="cat == selectedCategory" (click)="changeCategory(cat)">{{cat}}</button>
 	</div>
-	<div class="col-9 bg-success p-2">
-		<!-- {{getProducts().length}} Products -->		
-<div *ngFor="let p of getProducts()" class="card p-1 m-1">
-	<div class="card-header p-1">
-		{{p.name}}
-		<span class="float-right tag-primary">
-			{{p.price | currency:"USD":true:"2.2-2"}}</span>
-	</div>
-	<div class="card-body p-1">
-		<div class="card-body p-0">
-			<p>{{p.description}}</p>
+	<div class="col-9 bg-white p-2">
+		<!-- {{getProducts().length}} Products -->
+		<div *ngFor="let p of getProducts()" class="card p-1 m-1">
+			<div class="card-header p-1">
+				{{p.name}}
+				<span class="float-right tag-primary">
+				{{p.price | currency:"USD":true:"2.2-2"}}</span>
+			</div>
+			<div class="card-body p-1">
+				<div class="card-body p-0">
+					<p>{{p.description}}</p>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
