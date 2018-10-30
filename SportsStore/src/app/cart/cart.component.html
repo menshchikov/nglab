@@ -1,0 +1,15 @@
+<div class="float-right">
+	<small>
+		Your cart:
+		<span *ngIf="cartService.itemCount > 0">
+			{{cartService.itemCount}} items
+			{{cartService.cartPrice | currency:"USD":true:"2.2-2"}}
+		</span>
+		<span *ngIf="cartService.itemCount == 0">
+			(empty)
+		</span>
+	</small>
+	<span class="oi oi-cart"></span>
+	<button type="button" class="btn btn-sm btn-primary" [disabled]="cartService.itemCount == 0">
+		
+	</button>

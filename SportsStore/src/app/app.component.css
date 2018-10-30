@@ -1,4 +1,5 @@
 @import '~bootstrap/dist/css/bootstrap.min.css' ;
+@import '~open-iconic/font/css/open-iconic-bootstrap.css';
 .class1{
 	color:green;
 	font-weight: bold;
