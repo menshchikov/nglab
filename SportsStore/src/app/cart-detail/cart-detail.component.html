@@ -1,0 +1,58 @@
+<div>
+	<h3 class="bg-info p-1">Cart Detail Component</h3>
+</div>
+<div class="m-1">
+	<table>
+		<thead>
+			<tr>
+				<th>Quentity</th>
+				<th>Product</th>
+				<th>Price</th>
+				<th>Subtotal</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngIf="cart.lines.length == 0">
+				<td>
+					Your cart is empty
+				</td>
+			</tr>
+			<tr *ngFor="let line of cart.lines">
+				<td>
+					<input type="number" class="form-control-sm"
+					[value]="line.quentity"
+					(change)="cart.updateQuentity(line.product, $event.target.value)"/>
+				</td>
+				<td>
+					{{line.product.name}}
+				</td>
+				<td>
+					{{line.product.price | currency:"USD":true:"2.2-2"}}
+				</td>
+				<td>
+					{{line.lineTotal | currency:"USD":true:"2.2-2"}}
+				</td>
+				<td>
+					<button class="btn btn-sm btn-danger" (click)="cart.removeLine(line.product.id)" >
+					Remove
+					</button>
+				</td>
+			</tr>
+		</tbody>
+		<tfoot>
+		<tr>
+			<td colspan="3">Total:</td>
+			<td>
+				{{cart.cartPrice | currency:"USD":true:"2.2-2"}}
+			</td>
+		</tr>
+		</tfoot>
+	</table>
+</div>
+<div>
+	<button class="btn btn-primary" routerLink="/store">
+	Continue Shopping
+	</button>
+	<button class="btn btn-primary" routerLink="/checkout" [disabled]="cart.lines.length == 0">Checkout
+	</button>
+</div>

@@ -9,7 +9,7 @@
 			(empty)
 		</span>
 	</small>
-	<span class="oi oi-cart"></span>
-	<button type="button" class="btn btn-sm btn-primary" [disabled]="cartService.itemCount == 0">
-		
+	
+	<button type="button" class="btn btn-sm btn-primary" [disabled]="cartService.itemCount == 0" routerLink="/cart">
+		<span class="oi oi-cart"></span>
 	</button>

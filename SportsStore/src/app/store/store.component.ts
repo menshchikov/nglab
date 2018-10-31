@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../model/product.model'
 import { ProductRepository } from '../model/model.service'
 import { CartService } from '../model/cart.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-store',
@@ -15,20 +16,22 @@ export class StoreComponent implements OnInit {
 
   constructor(
     private productRepository: ProductRepository,
-    private cartService: CartService) {
+    private cartService: CartService,
+    private router:Router) {
 
   }
   addProductToCart(product: Product) {
     this.cartService.addLine(product);
+    this.router.navigateByUrl("/cart");
   }
   getProducts(): Product[] {
-    console.log('store.component.getProducts')
+    //console.log('store.component.getProducts')
     return this.productRepository
       .getProducts(this.selectedCategory);
   }
 
   get products(): Product[] {
-    console.log('store.component.get products');
+    //console.log('store.component.get products');
     let pageIndex = (this.selectedPage - 1) * this.productsPerPage;
 
     return this.productRepository
@@ -37,7 +40,7 @@ export class StoreComponent implements OnInit {
   }
 
   getCategories(): string[] {
-    console.log('store.component.getCategories');
+    //console.log('store.component.getCategories');
     return this.productRepository.getCategories();
   }
 
@@ -55,7 +58,7 @@ export class StoreComponent implements OnInit {
   }
 
   get pageNumbers(): number[] {
-    console.log('store.component.get pageNumbers');
+    //console.log('store.component.get pageNumbers');
     let nums: number[] = [];
     let productCount = this.productRepository.getProducts(this.selectedCategory).length;
     let quotient = productCount / this.productsPerPage;
@@ -74,7 +77,7 @@ export class StoreComponent implements OnInit {
 
   ngOnInit() {
     let dt = new Date();
-    console.log('' + dt.toISOString() + ': store onInit');
+    //console.log('' + dt.toISOString() + ': store onInit');
   }
 
 }
