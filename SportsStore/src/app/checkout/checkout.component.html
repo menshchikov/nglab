@@ -1,3 +1,70 @@
-<div>
-	<h3 class="bg-info p-1">Checkout Component</h3>
+<div class="navbar navbar-primary m-0">
+	<a class="nabvar-brand" href="#">Sports Store - Checkout</a>
 </div>
+
+<div *ngIf="this.isOrderSent">
+	<h2>Thanks!</h2>
+	<p>Thanks for placing your order.</p>
+	<p>We'll ship your goods as soon as possible.</p>
+	<button>Return to store</button>
+</div>
+
+<form *ngIf="!this.isOrderSent"
+	  #form="ngForm"
+	  novalidate
+	  (ngSubmit)="submitOrder(form)">
+	<div class="form-group">
+		<label>Name</label>
+		<input #name="ngModel" name="name" [(ngModel)]="this.order.name" required />
+		<span *ngIf="this.isSubmitted && name.invalid" class="text-danger">
+			Please enter your name
+		</span>
+	</div>
+
+	<div class="form-group">
+		<label>Address</label>
+		<input #address="ngModel" name="address" [(ngModel)]="this.order.address" required />
+		<span *ngIf="this.isSubmitted && address.invalid" class="text-danger">
+			Please enter your address
+		</span>
+	</div>
+
+	<div class="form-group">
+		<label>City</label>
+		<input #city="ngModel" name="city" [(ngModel)]="this.order.city" required />
+		<span *ngIf="this.isSubmitted && city.invalid" class="text-danger">
+			Please enter your city
+		</span>
+	</div>
+
+	<div class="form-group">
+		<label>State</label>
+		<input #state="ngModel" name="state" [(ngModel)]="this.order.state" required />
+		<span *ngIf="this.isSubmitted && state.invalid" class="text-danger">
+			Please enter your state
+		</span>
+	</div>
+
+	<div class="form-group">
+		<label>Zip/Postal Code</label>
+		<input #zip="ngModel" name="zip" [(ngModel)]="this.order.zip" required />
+		<span *ngIf="this.isSubmitted && zip.invalid" class="text-danger">
+			Please enter your zip
+		</span>
+	</div>
+
+	<div class="form-group">
+		<label>Country</label>
+		<input #country="ngModel" name="country" [(ngModel)]="this.order.country" required />
+		<span *ngIf="this.isSubmitted && country.invalid" class="text-danger">
+			Please enter your country
+		</span>
+	</div>
+
+	<div>
+		<button>Back</button>
+		<button>Complete Order</button>
+	</div>
+
+
+</form>
