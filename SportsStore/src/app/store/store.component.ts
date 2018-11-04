@@ -1,83 +1,84 @@
-import { Component, OnInit } from '@angular/core';
-import { Product } from '../model/product.model'
-import { ProductRepository } from '../model/model.service'
-import { CartService } from '../model/cart.service';
+import {Component, OnInit} from '@angular/core';
+import {Product} from '../dal/model';
+import {ProductsService} from '../dal/products.service';
+import {CartService} from '../dal/cart.service';
 import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-store',
-  templateUrl: './store.component.html',
-  styleUrls: ['./store.component.css']
+    selector: 'app-store',
+    templateUrl: './store.component.html',
+    styleUrls: ['./store.component.css']
 })
 export class StoreComponent implements OnInit {
-  public selectedCategory = null;
-  public productsPerPage = 4;
-  public selectedPage = 1;
+    public selectedCategory = null;
+    public productsPerPage = 4;
+    public selectedPage = 1;
 
-  constructor(
-    private productRepository: ProductRepository,
-    private cartService: CartService,
-    private router:Router) {
+    constructor(private productRepository: ProductsService,
+                private cartService: CartService,
+                private router: Router) {
 
-  }
-  addProductToCart(product: Product) {
-    this.cartService.addLine(product);
-    this.router.navigateByUrl("/cart");
-  }
-  getProducts(): Product[] {
-    //console.log('store.component.getProducts')
-    return this.productRepository
-      .getProducts(this.selectedCategory);
-  }
+    }
 
-  get products(): Product[] {
-    //console.log('store.component.get products');
-    let pageIndex = (this.selectedPage - 1) * this.productsPerPage;
+    addProductToCart(product: Product) {
+        this.cartService.addLine(product);
+        this.router.navigateByUrl('/cart');
+    }
 
-    return this.productRepository
-      .getProducts(this.selectedCategory)
-      .slice(pageIndex, pageIndex + this.productsPerPage);
-  }
+    getProducts(): Product[] {
+        // console.log('store.component.getProducts')
+        return this.productRepository
+            .getProducts(this.selectedCategory);
+    }
 
-  getCategories(): string[] {
-    //console.log('store.component.getCategories');
-    return this.productRepository.getCategories();
-  }
+    get products(): Product[] {
+        // console.log('store.component.get products');
+        const pageIndex = (this.selectedPage - 1) * this.productsPerPage;
 
-  changeCategory(newCategory?: string) {
-    this.selectedCategory = newCategory;
-  }
+        return this.productRepository
+            .getProducts(this.selectedCategory)
+            .slice(pageIndex, pageIndex + this.productsPerPage);
+    }
 
-  changePage(newPage: number) {
-    this.selectedPage = newPage;
-  }
+    getCategories(): string[] {
+        // console.log('store.component.getCategories');
+        return this.productRepository.getCategories();
+    }
 
-  changePageSize(newSize: number) {
-    this.productsPerPage = newSize;
-    this.changePage(1);
-  }
+    changeCategory(newCategory?: string) {
+        this.selectedCategory = newCategory;
+    }
 
-  get pageNumbers(): number[] {
-    //console.log('store.component.get pageNumbers');
-    let nums: number[] = [];
-    let productCount = this.productRepository.getProducts(this.selectedCategory).length;
-    let quotient = productCount / this.productsPerPage;
-    let pagesCount = Math.ceil(quotient);
-    //debugger;
-    nums = Array(pagesCount).fill(0).map((x, i) => i + 1);
-    return nums;
-  }
+    changePage(newPage: number) {
+        this.selectedPage = newPage;
+    }
 
-  get pageCount(): number {
-    let nums: number[] = [];
-    let productCount = this.productRepository.getProducts(this.selectedCategory).length;
-    let quotient = productCount / this.productsPerPage;
-    return Math.ceil(quotient);
-  }
+    changePageSize(newSize: number) {
+        this.productsPerPage = newSize;
+        this.changePage(1);
+    }
 
-  ngOnInit() {
-    let dt = new Date();
-    //console.log('' + dt.toISOString() + ': store onInit');
-  }
+    get pageNumbers(): number[] {
+        // console.log('store.component.get pageNumbers');
+        let nums: number[] = [];
+        const productCount = this.productRepository.getProducts(this.selectedCategory).length;
+        const quotient = productCount / this.productsPerPage;
+        const pagesCount = Math.ceil(quotient);
+        // debugger;
+        nums = Array(pagesCount).fill(0).map((x, i) => i + 1);
+        return nums;
+    }
+
+    get pageCount(): number {
+        const nums: number[] = [];
+        const productCount = this.productRepository.getProducts(this.selectedCategory).length;
+        const quotient = productCount / this.productsPerPage;
+        return Math.ceil(quotient);
+    }
+
+    ngOnInit() {
+        const dt = new Date();
+        // console.log('' + dt.toISOString() + ': store onInit');
+    }
 
 }
